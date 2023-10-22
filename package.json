@@ -1,0 +1,18 @@
+{
+  "name": "signup-module",
+  "version": "1.0.0",
+  "description": "Sigup ModuleImplemented using node express mongo",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1"
+  }
+}

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-
+const jwt = require('jsonwebtoken');
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 const passwordRegexp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/;
@@ -45,6 +45,13 @@ userSchema.pre('save', async function(next){
 //verify password
 userSchema.methods.comparePassword = async function(yourPassword){
     return await bcrypt.compare(yourPassword, this.password)
+}
+
+//get the token
+userSchema.methods.jwtGenerateToken = function(){
+    return jwt.sign({id:this.id}, process.env.JWT_SECRET, {
+        expiresIn: 3600
+    });
 }
 
 module.exports = mongoose.model('User', userSchema);

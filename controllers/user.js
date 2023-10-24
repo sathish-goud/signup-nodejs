@@ -58,9 +58,14 @@ exports.signin = async (req, res, next)=>{
                 message: "Invalid Credentials"
             })
         }
+
+        const token = await user.jwtGenerateToken();
+
+
+
         res.status(200).json({
             success: true,
-            user
+            token
         })
 
     }
